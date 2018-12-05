@@ -1,8 +1,8 @@
 Для работы необходимо наличие в системе: docker, docker-compose, git.
 
-  Если их нет:
+  Если их нет.
 
-    Для Ubuntu 18.04
+    Для Ubuntu 18.04.
 
     - docker: 
         $ sudo apt update
