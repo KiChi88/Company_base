@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald|Roboto+Condensed');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Roboto Condensed";
+    color: #111;
+    
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+}
+
+.filter, .words {
+    font-family: 'Oswald';
+    padding: 20px;
+}
+
+.words {
+    padding: 5px 5px;
+}
+
+.btn-primary {
+    font-size: 18px;
+}
+
+#department, #is_working, .dropdown-menu {
+    width: 200px;
+    max-width: 200px;
+}
+
+.dropdown-item {
+    white-space: normal;
+}
+
+.alpha-groups {
+    padding-bottom: 20px;
+}
+
+.employee a {
+    color: #111;
+}
+
+.employee a:hover {
+    color: #007bff;
+}
+
+.emploee-header {
+    padding: 20px 0;
+    font-family: 'Oswald';
+}
+ 
+.paginator {
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.display-small {
+    display: none;
+}
+
+@media all and (max-width: 639px) {
+    .display-small {
+        display: block;
+    }
+    .display-large {
+        display: none;
+    }
+}

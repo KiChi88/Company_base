@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+
+    {% block navigation %}
+        <div class="container-fluid">
+            <div class="row">
+                <!--Фильтр по отделу-->
+                <div class="col text-center filter">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle text-truncate"
+                           id="department" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        >
+                            {{department_title}}
+                        </button>
+
+                        <div class="dropdown-menu" aria-labelledby="department">
+                            <!--Если отдел выбран, добавляем возможность вернуться ко всему списку-->
+                            {% if department_title != 'Все отделы' %}
+                                <a class="dropdown-item" 
+                                   href="{% url 'company_base:index' %}">Все отделы</a>
+                            {% endif %}
+                            {% for department in departments %}
+                                <a class="dropdown-item" 
+                                   href="{% url 'company_base:department' department.id %}">{{department}}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <!--Фильтр по работе в компании-->
+                <div class="col text-center filter">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle text-truncate"
+                           id="is_working" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        >
+                            {{is_working_title}}
+                        </button>
+
+                        <div class="dropdown-menu" aria-labelledby="is_working">
+                            <!--Если фильтр выбран, добавляем возможность вернуться ко всему списку-->
+                            {% if is_working_title != 'Все сотрудники' %}
+                                <a class="dropdown-item" 
+                                   href="{% url 'company_base:index' %}">Все сотрудники</a>
+                            {% endif %}
+                                <a class="dropdown-item" 
+                                   href="{% url 'company_base:is_working' 1 %}">Работает в компании</a>
+                                <a class="dropdown-item" 
+                                   href="{% url 'company_base:is_working' 0 %}">Не работает в компании</a>
+                        </div>
+                    </div>
+                </div>
+                <!--Перейти к странице с алфавитным указателем-->
+                <div class="col text-center filter">     
+                    <div class="dropright">
+                        <a role="button" class="btn btn-primary dropdown-toggle" 
+                           href="{% url 'company_base:alpha' %}">Алфавитный указатель</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+
+    {% block alpha %}
+    {% endblock %}
+    
+    {% load poll_extras %}
+    <div class="container-fluid">
+        {% include "pagination.html" %}
+        <!--Вывод данных в две колонки при большом размере экрана и наличии более одной фамилии-->
+        <div class="row display-large">
+            {% if object_list|length > 1 %}
+            <div class="col-md-4 col-sm-5 offset-md-2 offset-sm-1">
+                {% for employee in object_list|middle_before %}
+                    <p class="text-right employee">
+                        <a href="{% url 'company_base:employee' employee.id %}">{{ employee.full_name }}</a>
+                    </p>
+                {% endfor %}
+            </div>
+            <div class="col-md-4 col-sm-5">
+                {% for employee in object_list|middle_after %}
+                    <p class="text-left employee">
+                        <a href="{% url 'company_base:employee' employee.id %}">{{ employee.full_name }}</a>
+                    </p>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="col-6 offset-3">
+                {% for employee in object_list %}
+                    <p class="text-center employee">
+                        <a href="{% url 'company_base:employee' employee.id %}">{{ employee.full_name }}</a>
+                    </p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <!--Вывод данных в одну колонку при маленьком размере экрана-->
+        <div class="row display-small">
+            <div class="col-sm-8 col-10 offset-sm-2 offset-1">
+                {% for employee in object_list %}
+                    <p class="text-left employee">
+                        <a href="{% url 'company_base:employee' employee.id %}">{{ employee.full_name }}</a>
+                    </p>
+                {% endfor %}
+            </div>
+        </div>
+        {% include "pagination.html" %}
+    </div>
+
+{% endblock %}

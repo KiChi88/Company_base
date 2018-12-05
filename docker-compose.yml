@@ -1,0 +1,40 @@
+version: '2'
+services:
+
+    project:
+
+        build: ./project
+        volumes:
+        - ./project:/home/company_base
+        depends_on:
+          - postgres
+        expose:
+          - "8000"
+        command: gunicorn main.wsgi -b 0.0.0.0:8000
+
+
+    postgres:
+
+        build: ./postgres
+        restart: unless-stopped
+        expose:
+            - "5432"
+        environment:
+            LC_ALL: C.UTF-8
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: q1w2e3r4
+            POSTGRES_DB: company_base
+        volumes:
+            - pgdata:/var/lib/postgresql/data/
+
+    nginx:
+        restart: always
+        build: ./nginx/
+        ports:
+          - "80:80" # Настройка для localhost - "8000:80" 
+        links:
+          - project
+
+volumes:
+  pgdata:
+  redisdata:

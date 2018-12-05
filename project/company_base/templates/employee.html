@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Сотрудник{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <!--Вернуться на главную-->
+            <div class="col text-center filter">     
+                <div class="dropleft">
+                    <a role="button" class="btn btn-primary dropdown-toggle" 
+                       href="{% url 'company_base:index' %}">На главную</a>
+                </div>
+            </div>
+            <!--Перейти к странице с алфавитным указателем-->
+            <div class="col text-center filter">     
+                <div class="dropright">
+                    <a role="button" class="btn btn-primary dropdown-toggle" 
+                       href="{% url 'company_base:alpha' %}">Алфавитный указатель</a>
+                </div>
+            </div>
+        </div>
+        <!--Данные сотрудника-->
+        <div class="row emploee-header">
+            <div class="col-md-6 col-10 offset-md-3 offset-1">
+                <h3 class="text-center">Данные сотрудника</h3>
+                <h5 class="text-center">{{employee.full_name}}</h5>
+            </div>
+        </div>
+        <div class="employee-header">
+        <div class="row">
+            <div class="col-6">
+                <p class="text-right">Имя:</p>
+            </div>
+            <div class="col-6">
+                <p>{{employee.first_name}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <p class="text-right">Фамилия:</p>
+            </div>
+            <div class="col-6">
+                <p>{{employee.last_name}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <p class="text-right">Отчество:</p>
+            </div>
+            <div class="col-6">
+                <p>{{employee.middle_name}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <p class="text-right">Дата рождения:</p>
+            </div>
+            <div class="col-6">
+                <p>{{employee.borth_date}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <p class="text-right">Почта:</p>
+            </div>
+            <div class="col-6">
+                <p>{{employee.email}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <p class="text-right">Телефон:</p>
+            </div>
+            <div class="col-6">
+                <p>{{employee.phone}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <p class="text-right">Дата приёма на работу:</p>
+            </div>
+            <div class="col-6">
+                <p>{{employee.data_start}}</p>
+            </div>
+        </div>
+        {% if employee.data_end %}
+        <div class="row">
+            <div class="col-6">
+                <p class="text-right">Дата увольнения:</p>
+            </div>
+            <div class="col-6">
+                <p>{{employee.data_end}}</p>
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-6">
+                <p class="text-right">Должность:</p>
+            </div>
+            <div class="col-6">
+                <p>{{employee.role}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <p class="text-right">Отдел:</p>
+            </div>
+            <div class="col-6">
+                {% if employee.department %}
+                <p>{{employee.department}}</p>
+                {% else %}
+                <p>Не указан</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
