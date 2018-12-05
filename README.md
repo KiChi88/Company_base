@@ -40,8 +40,8 @@
         $ sudo docker-compose run project python3 manage.py loaddata db.json
         
     если необходимо создать суперпользователя:
-        $ sudo docker-compose run project python manage.py createsuperuser
+        $ sudo docker-compose run project python3 manage.py createsuperuser
         дальше по инструкциям
         
-    $ sudo docker-compose run project python manage.py collectstatic
+    $ sudo docker-compose run project python3 manage.py collectstatic
     $ sudo docker-compose up
