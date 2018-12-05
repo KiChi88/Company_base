@@ -32,6 +32,8 @@
     
 Затем выполняем:
     
+    Если хотим запустить на локальной машине, необходимо поменять настройки портов в файле docker-compose.yml как указано в комментариях
+    
     $ cd company_base
     $ sudo docker-compose build
     $ sudo docker-compose run project python3 manage.py migrate
